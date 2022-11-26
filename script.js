@@ -1,7 +1,8 @@
 let quotes = [];
 const quoteText = document.getElementById('quote');
 const authorText =  document.getElementById('author');
-const newQuoteButton = document.getElementById('new-quote'); 
+const newQuoteButton = document.getElementById('new-quote');
+const twitterButton = document.getElementById('twitter');
 
 // Get Quotes From API
 
@@ -20,7 +21,6 @@ async function getQuotes(){
         quotes = await response.json();
         const randomNumber = Math.floor(Math.random() * quotes.length);
         displayquotes(quotes[randomNumber])
-        // return quotes[randomNumber]
     } catch(e){
         console.log(e)
     }
@@ -28,13 +28,13 @@ async function getQuotes(){
 
 getQuotes()
 
-   
 
 
+function tweetQuote(){
+    const twitterURl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+    window.open(twitterURl, '_blank');
+}
 
-    newQuoteButton.addEventListener('click', getQuotes)
+newQuoteButton.addEventListener('click', getQuotes)
 
-
-
-
-
+twitterButton.addEventListener('click', tweetQuote)
